@@ -1,8 +1,8 @@
 export const SITE = {
   title: "Dev blog",
-  description: "React/Next.js, RSC, 성능 최적화, 인프라 메모",
+  description: "A blog about web development",
   author: "KevinGwon",
-  url: "https://<your-username>.github.io",
+  url: "https://kevingwon.github.io",
   nav: [
     { label: "Home", href: "/" },
     // { label: "Tags", href: "/tags" },
