@@ -1,0 +1,29 @@
+
+---
+import '../styles/globals.css'
+import { SITE } from '../config/site'
+import Header from './Header.astro'
+import Footer from './Footer.astro'
+const { frontmatter } = Astro.props
+const pageTitle = frontmatter?.title ? `${frontmatter.title} | ${SITE.title}` : SITE.title
+const pageDesc = frontmatter?.description ?? SITE.description
+---
+<html lang="ko">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{pageTitle}</title>
+    <meta name="description" content={pageDesc} />
+    <meta property="og:title" content={pageTitle} />
+    <meta property="og:description" content={pageDesc} />
+    <meta property="og:image" content="/og-default.png" />
+    <link rel="icon" href="/favicon.svg" />
+  </head>
+  <body class="min-h-screen bg-white text-slate-900">
+    <Header />
+    <main class="mx-auto max-w-3xl px-4 py-10 prose prose-slate">
+      <slot />
+    </main>
+    <Footer />
+  </body>
+</html>

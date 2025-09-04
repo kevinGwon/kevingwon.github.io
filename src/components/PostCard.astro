@@ -1,0 +1,13 @@
+
+---
+const { post } = Astro.props
+---
+<article>
+  <a href={post.url} class="no-underline">
+    <h2 class="m-0">{post.frontmatter.title}</h2>
+    <p class="m-0 text-sm text-slate-500">
+      {post.frontmatter.date} · {post.frontmatter.tags?.join(', ')}
+    </p>
+    {post.frontmatter.description && <p>{post.frontmatter.description}</p>}
+  </a>
+</article>
