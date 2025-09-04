@@ -33,7 +33,7 @@ RSC Payload는 클라이언트로 응답값이 전달되고 클라이언트 측 
 
 참조: [What is the React Server Component Payload (RSC)?](https://nextjs.org/docs/app/getting-started/server-and-client-components#on-the-server)
 
-Next.js 13 버전부터 서버 컴포넌트를 선택적으로 구성할 수 있고 RSC Payload 표현이 가능해지면서 스트리밍 렌더링을 지원하여 사용자에게 빠른 컨텐츠를 제공할 수 있습니다. (+근거 필요)
+Next.js 13 버전부터 서버 컴포넌트를 선택적으로 구성할 수 있고 RSC Payload 표현이 가능해지면서 스트리밍 렌더링을 지원하여 사용자에게 빠른 컨텐츠를 제공할 수 있습니다.
 
 Next.js 12 버전의 경우 클라이언트 중심으로만 컴포넌트 구성이 가능하여 스트리밍 렌더링과 같은 전략을 제공할 수 없습니다.
 
@@ -44,19 +44,16 @@ Next.js 12 버전의 경우 클라이언트 중심으로만 컴포넌트 구성�
 지금까지 RSC Payload가 무엇인지 간략하게 살펴보았는데요, 그렇다면 SEO에 제공되는 HTML 정보는 언제 생성될까요?
 
 1. 서버 컴포넌트 실행 → RSC Payload 생성
-
    - 서버는 React Server Components를 실행하면서 클라이언트 컴포넌트 경계, props, 데이터 등을 Flight 포맷으로 직렬화하여 RSC Payload를 생성합니다.
    - 이 Payload는 브라우저가 클라이언트 컴포넌트를 동적으로 로드하고 상호작용을 이어가기 위한 용도입니다.
    - SEO 크롤러는 이 Payload를 직접 읽지 못합니다.
 
 2. 서버에서 HTML 스트리밍 생성 (`renderToPipeableStream`)
-
    - 동시에 서버는 동일한 서버 컴포넌트 트리를 기반으로 SEO에 필요한 HTML shell을 renderToPipeableStream을 통해 스트리밍합니다.
    - 이때 Suspense 경계를 기준으로, Fallback → 준비된 블록 순으로 HTML이 조각 단위로 흘러갑니다.
    - 따라서 브라우저나 크롤러는 초기 HTML을 즉시 받아 빠른 FCP(First Contentful Paint)를 얻을 수 있습니다.
 
 3. RSC Payload + 클라이언트에서 하이드레이션
-
    - 브라우저는 서버가 내려준 HTML을 즉시 렌더링한 뒤, RSC Payload를 fetch하여 필요한 클라이언트 컴포넌트를 로드합니다.
    - React는 이 Payload와 클라이언트 JS 번들을 조합해 기존 HTML을 hydrate하여 상호작용이 가능하도록 만듭니다.
 
@@ -80,7 +77,6 @@ const { pipe } = renderToPipeableStream(<App />, {
 - [renderToPipeableStream](https://ko.react.dev/reference/react-dom/server/renderToPipeableStream)
 
 이 과정을 통해 브라우저는 초기 HTML과 상호작용 가능한 UI를 모두 얻게 됩니다. 그렇다면 서버 컴포넌트 자체는 어디에 저장되고 실행될까요?
-
 
 ### 서버컴포넌트 위치
 
