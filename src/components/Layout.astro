@@ -4,7 +4,7 @@ import { SITE } from '../config/site'
 import Header from './Header.astro'
 import Footer from './Footer.astro'
 const { frontmatter } = Astro.props
-const pageTitle = frontmatter?.title ? `${frontmatter.title} | ${SITE.title}` : SITE.title
+const pageTitle = frontmatter?.title ? `${frontmatter.title} | ${SITE.title}\`s blog` : `${SITE.title}\`s blog`
 const pageDesc = frontmatter?.description ?? SITE.description
 ---
 <html lang="ko">
